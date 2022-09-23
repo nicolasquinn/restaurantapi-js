@@ -104,7 +104,7 @@ function mostrarPlatillos(platillos) {
         // Registrar la cantidad y id del input.
         input.onchange = function () {
             const cantidad = parseInt(input.value);
-            agregarPlatillo({...platillo, cantidad})
+            agregarPlatillo({...platillo, cantidad}) // mando el objeto registrado en la DB + cantidad puesta en el input.
         }
 
         const divCantidad = document.createElement('DIV');
@@ -123,5 +123,13 @@ function mostrarPlatillos(platillos) {
 }
 
 function agregarPlatillo(producto) {
-    console.log(producto);
+
+    // Verifico q' la cant. sea > a 0 para insertarlo en el arreglo.
+    if (producto.cantidad > 0) {
+        // Inserto el objeto producto dentro del array pedido.
+        cliente.pedido = [...cliente.pedido, producto];
+        console.log(cliente);
+    } else {
+        console.log("Cantidad es = a 0")
+    }
 }
