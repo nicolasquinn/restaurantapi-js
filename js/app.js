@@ -34,7 +34,12 @@ function guardarCliente () {
         return; // corto la función.
     }
 
-    console.log("Todo lleno.")
-
+    // Lleno el objeto "cliente" con los datos.
+    cliente = { ...cliente, mesa, hora };
+    
+    // Ocultar modal BS
+    const modalForm = document.querySelector('#formulario');
+    const modalBootstrap = bootstrap.Modal.getInstance(modalForm);
+    modalBootstrap.hide();
 }
 
