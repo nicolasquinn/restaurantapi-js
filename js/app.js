@@ -36,10 +36,18 @@ function guardarCliente () {
 
     // Lleno el objeto "cliente" con los datos.
     cliente = { ...cliente, mesa, hora };
-    
+
     // Ocultar modal BS
     const modalForm = document.querySelector('#formulario');
     const modalBootstrap = bootstrap.Modal.getInstance(modalForm);
     modalBootstrap.hide();
+
+    // Mostrar las secciones
+    mostrarSecciones();
+}
+
+function mostrarSecciones () {
+    const secciones = document.querySelectorAll('.d-none')
+    secciones.forEach( seccion => seccion.classList.remove('d-none'));
 }
 
