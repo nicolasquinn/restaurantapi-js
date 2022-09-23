@@ -44,10 +44,22 @@ function guardarCliente () {
 
     // Mostrar las secciones
     mostrarSecciones();
+
+    // Obtener datos de la API
+    obtenerPlatillos();
 }
 
 function mostrarSecciones () {
     const secciones = document.querySelectorAll('.d-none')
     secciones.forEach( seccion => seccion.classList.remove('d-none'));
+}
+
+function obtenerPlatillos () {
+    const url = 'http://localhost:4000/platillos'
+    
+    fetch(url)
+        .then( resp => resp.json() )
+        .then( result => console.log(result) )
+        .catch( error => console.log(error) );
 }
 
