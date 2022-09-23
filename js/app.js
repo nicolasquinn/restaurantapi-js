@@ -72,12 +72,15 @@ function obtenerPlatillos () {
 function mostrarPlatillos(platillos) {
     const divContenido = document.querySelector('#platillos .contenido');
     
+    // Por cada objeto obtenido del API creo e inserto HTML en divContenido.
     platillos.forEach( platillo => {
         const { categoria, id, nombre, precio } = platillo;
 
+        // DIV Contenedor
         const row = document.createElement('DIV');
         row.classList.add('row', 'py-3');
 
+        // DIVs individuales que irán dentro del contenedor
         const divNombre = document.createElement('DIV');
         divNombre.classList.add('col-md-4');
         divNombre.textContent = nombre;
@@ -90,10 +93,23 @@ function mostrarPlatillos(platillos) {
         divCategoria.classList.add('col-md-3');
         divCategoria.textContent = categorias[categoria];
 
+        // Input que va dentro del divCantidad.
+        const input = document.createElement('INPUT');
+        input.classList.add('form-control');
+        input.type = 'number';
+        input.value = 0;
+        input.min = 0;
+        input.id = `producto-${id}`;
 
+        const divCantidad = document.createElement('DIV');
+        divCantidad.classList.add('col-md-2');
+        divCantidad.appendChild(input);
+
+        // Inserto todos los divs dentro del div contenedor, luego inserto este en el divContenido.
         row.appendChild(divNombre)
         row.appendChild(divPrecio)
         row.appendChild(divCategoria)
+        row.appendChild(divCantidad)
         divContenido.appendChild(row);
         
     })
