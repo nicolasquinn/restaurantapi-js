@@ -59,7 +59,27 @@ function obtenerPlatillos () {
     
     fetch(url)
         .then( resp => resp.json() )
-        .then( result => console.log(result) )
+        .then( result => mostrarPlatillos(result) ) // ejecuto la función para mostrar en HTML todos los resultados.
         .catch( error => console.log(error) );
+}
+
+function mostrarPlatillos(platillos) {
+    const divContenido = document.querySelector('#platillos .contenido');
+    
+    platillos.forEach( platillo => {
+        const { categoria, id, nombre, precio } = platillo;
+
+        const row = document.createElement('DIV');
+        row.classList.add('row');
+
+        const titulo = document.createElement('DIV');
+        titulo.classList.add('col-md-4');
+        titulo.textContent = nombre;
+
+        row.appendChild(titulo)
+        divContenido.appendChild(row);
+        
+    })
+
 }
 
