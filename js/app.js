@@ -137,6 +137,9 @@ function agregarPlatillo (producto) {
         cliente.pedido = [...resultado];
     }
 
+    // Limpiar el contenido HTML previo del resumen (y también el título)
+    limpiarResumen();
+
     // Mostrar el resumen en el HTML
     actualizarResumen();
 
@@ -148,8 +151,9 @@ function actualizarResumen () {
     const contenido = document.querySelector('#resumen .contenido');
 
     const resumen = document.createElement('DIV');
-    resumen.classList.add('col-md-6');
+    resumen.classList.add('col-md-6', 'card', 'py-5', 'px-3', 'shadow');
 
+    // HTML e info de la mesa
     const mesa = document.createElement('P');
     mesa.textContent = 'Mesa: ';
     mesa.classList.add('fw-bold');
@@ -158,6 +162,7 @@ function actualizarResumen () {
     mesaSpan.textContent = cliente.mesa; 
     mesaSpan.classList.add('fw-normal');
 
+    // HTML e info de la hora
     const hora = document.createElement('P');
     hora.classList.add('fw-bold');
     hora.textContent = 'Hora: ';
@@ -166,10 +171,77 @@ function actualizarResumen () {
     horaSpan.textContent = cliente.hora;
     horaSpan.classList.add('fw-normal');
 
+    // Itero el array pedidos para crear el HTML.
+    const grupo = document.createElement('UL');
+    grupo.classList.add('list-group')
+    
+    let { pedido } = cliente;
+    pedido.forEach( item => {
+        const { nombre, precio, cantidad } = item;
+        
+        // Creo un LI
+        const lista = document.createElement('LI');
+        lista.classList.add('list-group-item')
+
+        // Creo un H4 
+        const nombreEl = document.createElement('H4');
+        nombreEl.classList.add('my-4')
+        nombreEl.textContent = nombre;
+
+        // Creo un P para el precio
+        const precioEl = document.createElement('P');
+        precioEl.textContent = 'Precio: ';
+        precioEl.classList.add('fw-bold');
+        // Creo un SPAN para el precio
+        const precioSpanEl = document.createElement('SPAN');
+        precioSpanEl.textContent = `$${precio}`;
+        precioSpanEl.classList.add('fw-normal');
+
+        // Creo un P para la cantidad
+        const cantidadEl = document.createElement('P');
+        cantidadEl.textContent = 'Cantidad: ';
+        cantidadEl.classList.add('fw-bold');
+        // Creo un SPAN para la cantidad
+        const cantidadSpanEl = document.createElement('SPAN');
+        cantidadSpanEl.textContent = cantidad;
+        cantidadSpanEl.classList.add('fw-normal');
+    
+        // Inserto los SPANS dentro de los P
+        precioEl.appendChild(precioSpanEl);
+        cantidadEl.appendChild(cantidadSpanEl);
+        // Inserto el todo en el LI 
+        lista.appendChild(nombreEl);
+        lista.appendChild(precioEl);
+        lista.appendChild(cantidadEl);
+        // Inserto el LI en el UL 
+        grupo.appendChild(lista);
+
+    })
+
+    // HTML del heading
+    const heading = document.createElement('H3');
+    heading.textContent = 'Platillos consumidos';
+    heading.classList.add('my-4', 'text-center');
+
     // Inserto los spans dentro de los p 
     mesa.appendChild(mesaSpan);
     hora.appendChild(horaSpan);
-    // Inserto los p dentro del div
-    contenido.appendChild(mesa);
-    contenido.appendChild(hora);
+    // Inserto los p dentro del div resumen
+    resumen.appendChild(mesa);
+    resumen.appendChild(hora);
+    resumen.appendChild(heading);
+    // Inserto el UL en el div resumen
+    resumen.appendChild(grupo);
+    // Inserto el div en el contenido
+    contenido.appendChild(resumen);
+}
+
+function limpiarResumen () {
+    const contenido = document.querySelector('#resumen .contenido');
+
+    // Si contenido tiene algo, lo elimino.
+    while (contenido.firstChild) {
+        contenido.removeChild(contenido.firstChild);
+    }
+
 }
