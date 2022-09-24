@@ -311,20 +311,99 @@ function mensajePedidoVacio () {
 }
 
 function formularioPropinas () {
+
     const contenido = document.querySelector('#resumen .contenido');
 
+    // DIV separador
     const formulario = document.createElement('DIV');
     formulario.classList.add('col-md-6', 'formulario');
 
+    // DIV contenedor principal
     const formularioDiv = document.createElement('DIV');
-    formulario.classList.add('card', 'py-2', 'px-3', 'shadow');
+    formularioDiv.classList.add('card', 'py-2', 'px-3', 'shadow');
 
+    // Creo un H3
     const heading = document.createElement('H3');
     heading.classList.add('my-4', 'text-center');
     heading.textContent = 'Propina';
 
+    // Creo un INPUT radio 10%
+    const radio10 = document.createElement('INPUT');
+    radio10.type = 'radio';
+    radio10.name = 'propina';
+    radio10.value = '10';
+    radio10.classList.add('form-check-input');
+    // Creo un LABEL para el radio10
+    const radio10Label = document.createElement('LABEL');
+    radio10Label.textContent = '10%';
+    radio10Label.classList.add('form-check-label');
+    // Creo un DIV para radio10
+    const radio10Div = document.createElement('DIV');
+    radio10Div.classList.add('form-check');
+    // Inserto todo
+    radio10Div.appendChild(radio10);
+    radio10Div.appendChild(radio10Label)
+
+    // Creo un INPUT radio 25%
+    const radio25 = document.createElement('INPUT');
+    radio25.type = 'radio';
+    radio25.name = 'propina';
+    radio25.value = '25';
+    radio25.classList.add('form-check-input');
+    // Creo un LABEL para el radio25
+    const radio25Label = document.createElement('LABEL');
+    radio25Label.textContent = '25%';
+    radio25Label.classList.add('form-check-label');
+    // Creo un DIV para radio25
+    const radio25Div = document.createElement('DIV');
+    radio25Div.classList.add('form-check');
+    // Inserto todo
+    radio25Div.appendChild(radio25);
+    radio25Div.appendChild(radio25Label);
+
+    // Creo un INPUT radio 50%
+    const radio50 = document.createElement('INPUT');
+    radio50.type = 'radio';
+    radio50.name = 'propina';
+    radio50.value = '50';
+    radio50.classList.add('form-check-input');
+    // Creo un LABEL para el radio50
+    const radio50Label = document.createElement('LABEL');
+    radio50Label.textContent = '50%';
+    radio50Label.classList.add('form-check-label');
+    // Creo un DIV para radio50
+    const radio50Div = document.createElement('DIV');
+    radio50Div.classList.add('form-check');
+    // Inserto todo
+    radio50Div.appendChild(radio50);
+    radio50Div.appendChild(radio50Label);
+
+    // Creo un INPUT radio sin propina
+    const radioSin = document.createElement('INPUT');
+    radioSin.type = 'radio';
+    radioSin.name = 'propina';
+    radioSin.value = '0';
+    radioSin.classList.add('form-check-input');
+    // Creo un LABEL para el radio50
+    const radioSinLabel = document.createElement('LABEL');
+    radioSinLabel.textContent = 'Sin propina';
+    radioSinLabel.classList.add('form-check-label');
+    // Creo un DIV para radio50
+    const radioSinDiv = document.createElement('DIV');
+    radioSinDiv.classList.add('form-check');
+    // Inserto todo
+    radioSinDiv.appendChild(radioSin);
+    radioSinDiv.appendChild(radioSinLabel);
+
+    // Inserto el H3 y los radios en el DIV principal
     formularioDiv.appendChild(heading);
+    formularioDiv.appendChild(radio10Div);
+    formularioDiv.appendChild(radio25Div);
+    formularioDiv.appendChild(radio50Div);
+    formularioDiv.appendChild(radioSinDiv);
+    // Inserto el DIV principal en el separador
     formulario.appendChild(formularioDiv);
+    // Inserto el separador en el contenedor general.
     contenido.appendChild(formulario);
 
 }
