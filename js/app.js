@@ -137,11 +137,15 @@ function agregarPlatillo (producto) {
         cliente.pedido = [...resultado];
     }
 
-    // Limpiar el contenido HTML previo del resumen (y también el título)
+    // Limpio todo el HTML.
     limpiarResumen();
-
-    // Mostrar el resumen en el HTML
-    actualizarResumen();
+    // Lo actualizo.
+    if (cliente.pedido.length) {
+        actualizarResumen();
+    } else {
+        // Si el arreglo no tiene nada.
+        mensajePedidoVacio();
+    }
 
 }
 
@@ -267,14 +271,36 @@ function limpiarResumen () {
 
 }
 
-
 function eliminarPedido (id) {
+
     let { pedido } = cliente;
     // Filtro el que quiero eliminar
     const pedidoActualizado = pedido.filter( item => item.id !== id );
     cliente.pedido = [...pedidoActualizado];
-    // Limpio todo el HTML nuevamente y actualizo el resumen actual.
-    limpiarResumen();
-    actualizarResumen();
 
+    // Limpio todo el HTML nuevamente.
+    limpiarResumen();
+    // Actualizo el HTML.
+    if (cliente.pedido.length) {
+        actualizarResumen();
+    } else {
+        // Si el arreglo no tiene nada.
+        mensajePedidoVacio();
+    }
+
+    // Reestablezco a 0 el input correspondiente
+    const productoId = `#producto-${id}`;
+    const inputProducto = document.querySelector(productoId)
+    inputProducto.value = 0;
+
+}
+
+function mensajePedidoVacio () {
+    const contenido = document.querySelector('#resumen .contenido')
+    // Creo el mensaje
+    const mensaje = document.createElement('P');
+    mensaje.classList.add('text-center');
+    mensaje.textContent = 'Añade los elementos del pedido';
+    // Lo inserto
+    contenido.appendChild(mensaje);
 }
