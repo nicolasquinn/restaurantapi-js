@@ -333,6 +333,7 @@ function formularioPropinas () {
     radio10.name = 'propina';
     radio10.value = '10';
     radio10.classList.add('form-check-input');
+    radio10.onclick = calcularPropina; // al clickear ejecuto la función.
     // Creo un LABEL para el radio10
     const radio10Label = document.createElement('LABEL');
     radio10Label.textContent = '10%';
@@ -350,6 +351,7 @@ function formularioPropinas () {
     radio25.name = 'propina';
     radio25.value = '25';
     radio25.classList.add('form-check-input');
+    radio25.onclick = calcularPropina; // al clickear ejecuto la función.
     // Creo un LABEL para el radio25
     const radio25Label = document.createElement('LABEL');
     radio25Label.textContent = '25%';
@@ -367,6 +369,7 @@ function formularioPropinas () {
     radio50.name = 'propina';
     radio50.value = '50';
     radio50.classList.add('form-check-input');
+    radio50.onclick = calcularPropina; // al clickear ejecuto la función.
     // Creo un LABEL para el radio50
     const radio50Label = document.createElement('LABEL');
     radio50Label.textContent = '50%';
@@ -384,6 +387,7 @@ function formularioPropinas () {
     radioSin.name = 'propina';
     radioSin.value = '0';
     radioSin.classList.add('form-check-input');
+    radioSin.onclick = calcularPropina; // al clickear ejecuto la función.
     // Creo un LABEL para el radio50
     const radioSinLabel = document.createElement('LABEL');
     radioSinLabel.textContent = 'Sin propina';
@@ -405,5 +409,28 @@ function formularioPropinas () {
     formulario.appendChild(formularioDiv);
     // Inserto el separador en el contenedor general.
     contenido.appendChild(formulario);
+
+}
+
+function calcularPropina () {
+
+    const { pedido } = cliente;
+    let subtotal = 0;
+
+    // Calculo el subtotal a pagar
+    pedido.forEach( item => {
+        subtotal += item.cantidad * item.precio;
+    })
+
+    // Selecciono el radio button correspondiente
+    const propinaSelec = document.querySelector('[name="propina"]:checked').value;
+
+    // Calculo la propina en base al subtotal
+    const propina = ((subtotal * parseInt(propinaSelec)) / 100);
+
+    // Calculo el total
+    const total = propina + subtotal;
+
+    console.log(total);
 
 }
