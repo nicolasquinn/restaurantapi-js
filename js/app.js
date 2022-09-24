@@ -137,6 +137,9 @@ function agregarPlatillo (producto) {
         cliente.pedido = [...resultado];
     }
 
+    // Limpiar el contenido HTML previo del resumen (y también el título)
+    limpiarResumen();
+
     // Mostrar el resumen en el HTML
     actualizarResumen();
 
@@ -148,8 +151,9 @@ function actualizarResumen () {
     const contenido = document.querySelector('#resumen .contenido');
 
     const resumen = document.createElement('DIV');
-    resumen.classList.add('col-md-6');
+    resumen.classList.add('col-md-6', 'card', 'py-5', 'px-3', 'shadow');
 
+    // HTML e info de la mesa
     const mesa = document.createElement('P');
     mesa.textContent = 'Mesa: ';
     mesa.classList.add('fw-bold');
@@ -158,6 +162,7 @@ function actualizarResumen () {
     mesaSpan.textContent = cliente.mesa; 
     mesaSpan.classList.add('fw-normal');
 
+    // HTML e info de la hora
     const hora = document.createElement('P');
     hora.classList.add('fw-bold');
     hora.textContent = 'Hora: ';
@@ -166,10 +171,28 @@ function actualizarResumen () {
     horaSpan.textContent = cliente.hora;
     horaSpan.classList.add('fw-normal');
 
+    // HTML del heading
+    const heading = document.createElement('H3');
+    heading.textContent = 'Platillos consumidos';
+    heading.classList.add('my-4', 'text-center');
+
     // Inserto los spans dentro de los p 
     mesa.appendChild(mesaSpan);
     hora.appendChild(horaSpan);
     // Inserto los p dentro del div
-    contenido.appendChild(mesa);
-    contenido.appendChild(hora);
+    resumen.appendChild(mesa);
+    resumen.appendChild(hora);
+    resumen.appendChild(heading);
+    // Inserto el div en el contenido
+    contenido.appendChild(resumen);
+}
+
+function limpiarResumen () {
+    const contenido = document.querySelector('#resumen .contenido');
+
+    // Si contenido tiene algo, lo elimino.
+    while (contenido.firstChild) {
+        contenido.removeChild(contenido.firstChild);
+    }
+
 }
