@@ -177,7 +177,7 @@ function actualizarResumen () {
     
     let { pedido } = cliente;
     pedido.forEach( item => {
-        const { nombre, precio, cantidad } = item;
+        const { nombre, precio, cantidad, id} = item;
         
         // Creo un LI
         const lista = document.createElement('LI');
@@ -212,8 +212,17 @@ function actualizarResumen () {
         subtotalEl.classList.add('fw-bold');
         // Creo un SPAN para el subtotal
         const subtotalSpanEl = document.createElement('SPAN');
-        subtotalSpanEl.textContent = `$${precio * cantidad}`;
+        subtotalSpanEl.textContent = `$${precio * cantidad}`; // calculo el subtotal.
         subtotalSpanEl.classList.add('fw-normal');
+
+        // Creo un BUTTON para eliminar un elemento
+        const btnEliminar = document.createElement('BUTTON');
+        btnEliminar.classList.add('btn', 'btn-danger');
+        btnEliminar.textContent = 'Eliminar';
+        // Funcionalidad del botón
+        btnEliminar.onclick = () => {
+            eliminarPedido(id);
+        }
     
         // Inserto los SPANS dentro de los P
         precioEl.appendChild(precioSpanEl);
@@ -224,6 +233,7 @@ function actualizarResumen () {
         lista.appendChild(precioEl);
         lista.appendChild(cantidadEl);
         lista.appendChild(subtotalEl);
+        lista.appendChild(btnEliminar);
         // Inserto el LI en el UL 
         grupo.appendChild(lista);
 
@@ -254,5 +264,17 @@ function limpiarResumen () {
     while (contenido.firstChild) {
         contenido.removeChild(contenido.firstChild);
     }
+
+}
+
+
+function eliminarPedido (id) {
+    let { pedido } = cliente;
+    // Filtro el que quiero eliminar
+    const pedidoActualizado = pedido.filter( item => item.id !== id );
+    cliente.pedido = [...pedidoActualizado];
+    // Limpio todo el HTML nuevamente y actualizo el resumen actual.
+    limpiarResumen();
+    actualizarResumen();
 
 }
