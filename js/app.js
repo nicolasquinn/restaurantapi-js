@@ -171,7 +171,6 @@ function actualizarResumen () {
     horaSpan.textContent = cliente.hora;
     horaSpan.classList.add('fw-normal');
 
-<<<<<<< HEAD
     // Itero el array pedidos para crear el HTML.
     const grupo = document.createElement('UL');
     grupo.classList.add('list-group')
@@ -206,21 +205,30 @@ function actualizarResumen () {
         const cantidadSpanEl = document.createElement('SPAN');
         cantidadSpanEl.textContent = cantidad;
         cantidadSpanEl.classList.add('fw-normal');
+
+        // Creo un P para el subtotal
+        const subtotalEl = document.createElement('P');
+        subtotalEl.textContent = 'Subtotal: ';
+        subtotalEl.classList.add('fw-bold');
+        // Creo un SPAN para el subtotal
+        const subtotalSpanEl = document.createElement('SPAN');
+        subtotalSpanEl.textContent = `$${precio * cantidad}`;
+        subtotalSpanEl.classList.add('fw-normal');
     
         // Inserto los SPANS dentro de los P
         precioEl.appendChild(precioSpanEl);
         cantidadEl.appendChild(cantidadSpanEl);
+        subtotalEl.appendChild(subtotalSpanEl);
         // Inserto el todo en el LI 
         lista.appendChild(nombreEl);
         lista.appendChild(precioEl);
         lista.appendChild(cantidadEl);
+        lista.appendChild(subtotalEl);
         // Inserto el LI en el UL 
         grupo.appendChild(lista);
 
     })
 
-=======
->>>>>>> 2de8239247de404f403916d74dceae7c30deadbb
     // HTML del heading
     const heading = document.createElement('H3');
     heading.textContent = 'Platillos consumidos';
@@ -229,19 +237,12 @@ function actualizarResumen () {
     // Inserto los spans dentro de los p 
     mesa.appendChild(mesaSpan);
     hora.appendChild(horaSpan);
-<<<<<<< HEAD
     // Inserto los p dentro del div resumen
     resumen.appendChild(mesa);
     resumen.appendChild(hora);
     resumen.appendChild(heading);
     // Inserto el UL en el div resumen
     resumen.appendChild(grupo);
-=======
-    // Inserto los p dentro del div
-    resumen.appendChild(mesa);
-    resumen.appendChild(hora);
-    resumen.appendChild(heading);
->>>>>>> 2de8239247de404f403916d74dceae7c30deadbb
     // Inserto el div en el contenido
     contenido.appendChild(resumen);
 }
