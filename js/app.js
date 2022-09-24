@@ -316,11 +316,11 @@ function formularioPropinas () {
 
     // DIV separador
     const formulario = document.createElement('DIV');
-    formulario.classList.add('col-md-6', 'formulario');
+    formulario.classList.add('col-md-6');
 
     // DIV contenedor principal
     const formularioDiv = document.createElement('DIV');
-    formularioDiv.classList.add('card', 'py-2', 'px-3', 'shadow');
+    formularioDiv.classList.add('formulario', 'card', 'py-2', 'px-3', 'shadow');
 
     // Creo un H3
     const heading = document.createElement('H3');
@@ -431,6 +431,56 @@ function calcularPropina () {
     // Calculo el total
     const total = propina + subtotal;
 
-    console.log(total);
+    mostrarTotal(subtotal, total, propina);
 
+}
+
+function mostrarTotal(subtotal, total, propina) {
+    
+    const divTotales = document.createElement('DIV');
+    divTotales.classList.add('total-pagar');
+
+    // Subtotal
+    const subtotalParrafo = document.createElement('P');
+    subtotalParrafo.classList.add('fw-bold', 'mt-3');
+    subtotalParrafo.textContent = 'Subtotal Consumo: ';
+
+    const subtotalSpan = document.createElement('SPAN');
+    subtotalSpan.classList.add('fw-normal');
+    subtotalSpan.textContent = `$${subtotal}`;
+    subtotalParrafo.appendChild(subtotalSpan);
+
+    // Propina
+    const propinaParrafo = document.createElement('P');
+    propinaParrafo.classList.add('fw-bold');
+    propinaParrafo.textContent = 'Propina: ';
+
+    const propinaSpan = document.createElement('SPAN');
+    propinaSpan.classList.add('fw-normal');
+    propinaSpan.textContent = `$${propina}`;
+    propinaParrafo.appendChild(propinaSpan);
+
+    // Total
+    const totalParrafo = document.createElement('P');
+    totalParrafo.classList.add('fw-bold');
+    totalParrafo.textContent = 'Total a Pagar: ';
+
+    const totalSpan = document.createElement('SPAN');
+    totalSpan.classList.add('fw-normal');
+    totalSpan.textContent = `$${total}`;
+
+    totalParrafo.appendChild(totalSpan);
+
+    const totalPagarDiv = document.querySelector('.total-pagar');
+    if(totalPagarDiv) {
+        totalPagarDiv.remove();
+    }
+    
+    divTotales.appendChild(subtotalParrafo);
+    divTotales.appendChild(propinaParrafo);
+    divTotales.appendChild(totalParrafo);
+
+    const formulario = document.querySelector('.formulario');
+    formulario.appendChild(divTotales);
+    
 }
