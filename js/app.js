@@ -171,6 +171,7 @@ function actualizarResumen () {
     horaSpan.textContent = cliente.hora;
     horaSpan.classList.add('fw-normal');
 
+<<<<<<< HEAD
     // Itero el array pedidos para crear el HTML.
     const grupo = document.createElement('UL');
     grupo.classList.add('list-group')
@@ -218,6 +219,8 @@ function actualizarResumen () {
 
     })
 
+=======
+>>>>>>> 2de8239247de404f403916d74dceae7c30deadbb
     // HTML del heading
     const heading = document.createElement('H3');
     heading.textContent = 'Platillos consumidos';
@@ -226,12 +229,19 @@ function actualizarResumen () {
     // Inserto los spans dentro de los p 
     mesa.appendChild(mesaSpan);
     hora.appendChild(horaSpan);
+<<<<<<< HEAD
     // Inserto los p dentro del div resumen
     resumen.appendChild(mesa);
     resumen.appendChild(hora);
     resumen.appendChild(heading);
     // Inserto el UL en el div resumen
     resumen.appendChild(grupo);
+=======
+    // Inserto los p dentro del div
+    resumen.appendChild(mesa);
+    resumen.appendChild(hora);
+    resumen.appendChild(heading);
+>>>>>>> 2de8239247de404f403916d74dceae7c30deadbb
     // Inserto el div en el contenido
     contenido.appendChild(resumen);
 }
