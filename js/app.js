@@ -137,4 +137,39 @@ function agregarPlatillo (producto) {
         cliente.pedido = [...resultado];
     }
 
-  }
+    // Mostrar el resumen en el HTML
+    actualizarResumen();
+
+}
+
+function actualizarResumen () {
+
+    // Elemento padre donde va ir todo
+    const contenido = document.querySelector('#resumen .contenido');
+
+    const resumen = document.createElement('DIV');
+    resumen.classList.add('col-md-6');
+
+    const mesa = document.createElement('P');
+    mesa.textContent = 'Mesa: ';
+    mesa.classList.add('fw-bold');
+
+    const mesaSpan = document.createElement('SPAN');
+    mesaSpan.textContent = cliente.mesa; 
+    mesaSpan.classList.add('fw-normal');
+
+    const hora = document.createElement('P');
+    hora.classList.add('fw-bold');
+    hora.textContent = 'Hora: ';
+
+    const horaSpan = document.createElement('SPAN');
+    horaSpan.textContent = cliente.hora;
+    horaSpan.classList.add('fw-normal');
+
+    // Inserto los spans dentro de los p 
+    mesa.appendChild(mesaSpan);
+    hora.appendChild(horaSpan);
+    // Inserto los p dentro del div
+    contenido.appendChild(mesa);
+    contenido.appendChild(hora);
+}
