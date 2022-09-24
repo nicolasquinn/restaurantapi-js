@@ -155,7 +155,7 @@ function actualizarResumen () {
     const contenido = document.querySelector('#resumen .contenido');
 
     const resumen = document.createElement('DIV');
-    resumen.classList.add('col-md-6', 'card', 'py-5', 'px-3', 'shadow');
+    resumen.classList.add('col-md-6', 'card', 'py-2', 'px-3', 'shadow');
 
     // HTML e info de la mesa
     const mesa = document.createElement('P');
@@ -238,6 +238,7 @@ function actualizarResumen () {
         lista.appendChild(cantidadEl);
         lista.appendChild(subtotalEl);
         lista.appendChild(btnEliminar);
+
         // Inserto el LI en el UL 
         grupo.appendChild(lista);
 
@@ -252,13 +253,17 @@ function actualizarResumen () {
     mesa.appendChild(mesaSpan);
     hora.appendChild(horaSpan);
     // Inserto los p dentro del div resumen
+    resumen.appendChild(heading);
     resumen.appendChild(mesa);
     resumen.appendChild(hora);
-    resumen.appendChild(heading);
     // Inserto el UL en el div resumen
     resumen.appendChild(grupo);
     // Inserto el div en el contenido
     contenido.appendChild(resumen);
+
+    // Creo el formulario de propinas
+    formularioPropinas();
+
 }
 
 function limpiarResumen () {
@@ -303,4 +308,23 @@ function mensajePedidoVacio () {
     mensaje.textContent = 'Añade los elementos del pedido';
     // Lo inserto
     contenido.appendChild(mensaje);
+}
+
+function formularioPropinas () {
+    const contenido = document.querySelector('#resumen .contenido');
+
+    const formulario = document.createElement('DIV');
+    formulario.classList.add('col-md-6', 'formulario');
+
+    const formularioDiv = document.createElement('DIV');
+    formulario.classList.add('card', 'py-2', 'px-3', 'shadow');
+
+    const heading = document.createElement('H3');
+    heading.classList.add('my-4', 'text-center');
+    heading.textContent = 'Propina';
+
+    formularioDiv.appendChild(heading);
+    formulario.appendChild(formularioDiv);
+    contenido.appendChild(formulario);
+
 }
