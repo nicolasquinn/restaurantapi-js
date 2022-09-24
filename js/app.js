@@ -122,14 +122,19 @@ function mostrarPlatillos(platillos) {
 
 }
 
-function agregarPlatillo(producto) {
-
-    // Verifico q' la cant. sea > a 0 para insertarlo en el arreglo.
+function agregarPlatillo (producto) {
+    // Extraigo el arreglo pedido del obj. global cliente.
+    let { pedido } = cliente;
+   
+    // Almaceno en resultado todos los objetos de pedido que no tengan el mismo ID del nuevo producto insertado.
+    const resultado = pedido.filter( item => item.id !== producto.id);
+   
+    // Si hay cantidad agrego el nuevo producto con su nueva cantidad
     if (producto.cantidad > 0) {
-        // Inserto el objeto producto dentro del array pedido.
-        cliente.pedido = [...cliente.pedido, producto];
-        console.log(cliente);
+        cliente.pedido = [...resultado, producto];
+    // Si cantidad es 0 el producto ya se eliminó en el filter  
     } else {
-        console.log("Cantidad es = a 0")
+        cliente.pedido = [...resultado];
     }
-}
+
+  }
